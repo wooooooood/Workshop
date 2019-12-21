@@ -1,0 +1,7 @@
+//바벨에 대한 설정파일, 만들고 안건드림
+{
+    "presets": [
+        "@babel/env",
+        "@babel/react"
+    ]
+}
