@@ -1,7 +1,8 @@
-//webpack configuration file, 존나 수정 예정
+//webpack configuration file
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin'); //src의 파일을 public에 만드러줌
 const WebpackPwaManifest = require('webpack-pwa-manifest');
+const { GenerateSW } = require('workbox-webpack-plugin');
 
 module.exports = {
     entry: './src/index.js',  //쉼표, 중괄호, 세미콜론 중요
@@ -37,6 +38,9 @@ module.exports = {
                     sizes: [96,128,192,256,384,512]
                 }
             ]
+        }),
+        new GenerateSW({
+            include: [/\.html$/, /\.js$/]
         })
     ]
 }
