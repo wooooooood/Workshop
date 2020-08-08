@@ -6,12 +6,12 @@ namespace Sample.ConsoleApp
 {
     public class Program
     {
+        public static SampleModel Model = new SampleModel();
         public static void Main(string[] args)
         {
-            var model = new SampleModel();
-            model.Arguments = args.ToList();
+            Model.Arguments = args.ToList();
 
-            Console.WriteLine("Hello World!" + string.Join(":::", model.Arguments));
+            Console.WriteLine("Hello World!" + string.Join(":::", Model.Arguments));
         }
     }
 
