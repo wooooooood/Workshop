@@ -1,0 +1,13 @@
+C:\Users\yuiop\Workshop\200805_OSS\Mac VSCode\Sample.ConsoleApp\bin\Debug\netcoreapp3.1\Sample.ConsoleApp.exe
+C:\Users\yuiop\Workshop\200805_OSS\Mac VSCode\Sample.ConsoleApp\bin\Debug\netcoreapp3.1\Sample.ConsoleApp.deps.json
+C:\Users\yuiop\Workshop\200805_OSS\Mac VSCode\Sample.ConsoleApp\bin\Debug\netcoreapp3.1\Sample.ConsoleApp.runtimeconfig.json
+C:\Users\yuiop\Workshop\200805_OSS\Mac VSCode\Sample.ConsoleApp\bin\Debug\netcoreapp3.1\Sample.ConsoleApp.runtimeconfig.dev.json
+C:\Users\yuiop\Workshop\200805_OSS\Mac VSCode\Sample.ConsoleApp\bin\Debug\netcoreapp3.1\Sample.ConsoleApp.dll
+C:\Users\yuiop\Workshop\200805_OSS\Mac VSCode\Sample.ConsoleApp\bin\Debug\netcoreapp3.1\Sample.ConsoleApp.pdb
+C:\Users\yuiop\Workshop\200805_OSS\Mac VSCode\Sample.ConsoleApp\obj\Debug\netcoreapp3.1\Sample.ConsoleApp.csprojAssemblyReference.cache
+C:\Users\yuiop\Workshop\200805_OSS\Mac VSCode\Sample.ConsoleApp\obj\Debug\netcoreapp3.1\Sample.ConsoleApp.AssemblyInfoInputs.cache
+C:\Users\yuiop\Workshop\200805_OSS\Mac VSCode\Sample.ConsoleApp\obj\Debug\netcoreapp3.1\Sample.ConsoleApp.AssemblyInfo.cs
+C:\Users\yuiop\Workshop\200805_OSS\Mac VSCode\Sample.ConsoleApp\obj\Debug\netcoreapp3.1\Sample.ConsoleApp.csproj.CoreCompileInputs.cache
+C:\Users\yuiop\Workshop\200805_OSS\Mac VSCode\Sample.ConsoleApp\obj\Debug\netcoreapp3.1\Sample.ConsoleApp.dll
+C:\Users\yuiop\Workshop\200805_OSS\Mac VSCode\Sample.ConsoleApp\obj\Debug\netcoreapp3.1\Sample.ConsoleApp.pdb
+C:\Users\yuiop\Workshop\200805_OSS\Mac VSCode\Sample.ConsoleApp\obj\Debug\netcoreapp3.1\Sample.ConsoleApp.genruntimeconfig.cache
