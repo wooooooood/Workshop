@@ -7,14 +7,14 @@ namespace Sample.ConsoleApp.Tests
     [TestClass]
     public class ProgramTest
     {
-        [TestMethod]
-        public void Given_Arguments_When_Main_Invoked_Then_It_Should_Return_Result()
+        [DataTestMethod]
+        [DataRow("dotnet", "core")]
+        public void Given_Arguments_When_Main_Invoked_Then_It_Should_Return_Result(params string[] args)
         {
-            var args = new[] { "dotnet", "core" }.ToArray();
-
             Program.Main(args);
 
-            Program.Model.Arguments.First().Should().Be("dotnet");
+            Program.Model.Arguments.First().Should().Be(args.First());
         }
     }
 }
+//Test - Live Unit test 가능
