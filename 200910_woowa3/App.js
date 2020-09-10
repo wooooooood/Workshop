@@ -1,33 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const SessionItem = ({ title }) => <li>{title}</li>;
-
-class ClassApp extends React.Component {
-  constructor(props) {
-    super(props); //=React.Component. 컨벤션임
-
-    this.state = {
-      //instance객체를 만들기 때문에 다 this로 참조
-      displayOrder: "ASC"
-    };
-  }
-
-  toggleDisplayOrder = () => {
-    this.setState({
-      //애로우는 raxical? 문맥 컨텍스트 따름. 다른건 실행 컨택스트 따라서 바인딩을 해야함. 애로우는 바인딩 필요없음
-      displayOrder: displayOrder === "ASC" ? "DESC" : "ASC"
-    });
-  };
-
-  render() {
-    return (
-      <div>
-        여기여기
-        <button onClick={this.toggleDisplayOrder}>정렬</button>
-      </div>
-    );
-  }
-}
 
 const App = (props) => {
   const { displayOrder, toggleDisplayOrder } = React.useState("ASC");
@@ -36,6 +9,16 @@ const App = (props) => {
     ...session,
     order: i
   }));
+
+  //제어 안되는 애들(sideEffect)을 몰아넣는곳
+  //리턴을 함수로 해주면 App component가 ui에서 사라질 때 호출됨
+  useEffect(() => {
+    return () => {
+      //ex. 구독해제
+      //이미 있는 객체를 내가 임의로 날리는 법은 없다
+      //js gc가 알아서 한다
+    };
+  });
 
   const onToggleDisplayOrder = () => {
     toggleDisplayOrder(displayOrder === "ASC" ? "DESC" : "ASC");
