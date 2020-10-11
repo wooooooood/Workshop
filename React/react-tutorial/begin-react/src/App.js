@@ -3,9 +3,7 @@ import Hello from './Hello.js';
 
 function App() {
   return (
-    <div>
-      <Hello />
-    </div>
+      <Hello name="React" color="red"/>
   );
 }
 
