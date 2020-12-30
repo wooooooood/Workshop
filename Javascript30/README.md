@@ -18,24 +18,3 @@ Good to do with friend!
 
 Go hit the videos and enjoy day1
 
-### 1 Javascript DrumKit
-- [keycode.info](keycode.info)
-- data attribute: data-*
-
-### 2
-
-### 3
-
-### 4
-
-### 5
-
-### 6
-
-### 7
-
-### 8
-
-### 9
-
-### 10
