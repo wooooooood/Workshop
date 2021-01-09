@@ -1,14 +1,14 @@
-//react component 만들기
-import React from 'react'; //react를 불러와서 사용하겠다
-//컴포넌트 만들기: 함수형 or 클래스
+import React from 'react';
 
-//컴포넌트 이름은 파스칼케이스
-function Hello({color, name}) {
-    //jsx 리턴
-    //객체, 객체를 감싸는 중괄호 
-    return <div style={{
+function Hello({color, name, isSpecial}) {
+    return (
+      <div style={{
         color
-    }}>ㅎㅇ {name}</div>;
+      }}>
+        {isSpecial && <b>*</b>} //단순히 숨기고 보여주는 경우
+        ㅎㅇ {name}
+      </div>
+    );
 }
 
 Hello.defaultProps = {
