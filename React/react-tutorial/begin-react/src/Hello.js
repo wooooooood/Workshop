@@ -5,7 +5,7 @@ function Hello({color, name, isSpecial}) {
       <div style={{
         color
       }}>
-        {isSpecial && <b>*</b>} //단순히 숨기고 보여주는 경우
+        {isSpecial && <b>*</b>}
         ㅎㅇ {name}
       </div>
     );
