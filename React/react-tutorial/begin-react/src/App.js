@@ -1,34 +1,63 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import UserList from './UserList';
+import CreateUser from './CreateUser';
 
 function App() {
-  const users = [
-    {
-        id: 1,
-        username: 'v',
-        email: 'v@v.com'
-    },
-    {
-        id: 2,
-        username: 'v2',
-        email: 'v2@v.com'
-    },
-    {
-        id: 3,
-        username: 'v3',
-        email: 'v3@v.com'
-    },
-  ];
-
-  //값이 바뀐다고 컴포넌트가 리렌더링 될 필요가 없기 때문에 변수로 관리하는것도 괜찬다
+  const [inputs, setInputs] = useState({
+    username: '',
+    email: ''
+  });
+  const {username, email} = inputs;
+  
   const nextId = useRef(4);
   const onCreate = () => {
-    console.log(nextId.current); //4
+    const user = {
+      id: nextId.current,
+      username,
+      email,
+    };
+    setUsers([...users, user]); //spread
+    //concat: setUsers(users.concat(user));
+    setInputs({
+      username: '',
+      email: ''
+    });
     nextId.current += 1;
+  };
+  const onChange = e => {
+    const {name, value} = e.target;
+    setInputs({
+      ...inputs,
+      [name]:value
+    });
+  };
+  const onRemove = id =>{
+    //삭제시에는 filter를 사용하면 편하다
+    setUsers(users.filter(user => user.id != id));
   }
-
+  const [users, setUsers] = useState([
+    {
+      id: 1,
+      username: 'v',
+      email: 'v@v.com'
+    },
+    {
+      id: 2,
+      username: 'v2',
+      email: 'v2@v.com'
+    },
+    {
+      id: 3,
+      username: 'v3',
+      email: 'v3@v.com'
+    },
+  ]);
+  
   return (
-    <UserList users={users}/>
+    <>
+    <CreateUser username={username} email={email} onChange={onChange} onCreate={onCreate}/>
+    <UserList users={users} onRemove={onRemove}/>
+    </>
   );
 }
 
