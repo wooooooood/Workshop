@@ -16,8 +16,7 @@ function App() {
       username,
       email,
     };
-    setUsers([...users, user]); //spread
-    //concat: setUsers(users.concat(user));
+    setUsers([...users, user]);
     setInputs({
       username: '',
       email: ''
@@ -32,31 +31,40 @@ function App() {
     });
   };
   const onRemove = id =>{
-    //삭제시에는 filter를 사용하면 편하다
     setUsers(users.filter(user => user.id != id));
+  }
+  const onToggle = id => {
+    setUsers(users.map(
+      user => user.id === id
+      ? {...user, active: !user.active}
+      : user
+    ));
   }
   const [users, setUsers] = useState([
     {
       id: 1,
       username: 'v',
-      email: 'v@v.com'
+      email: 'v@v.com',
+      active: true,
     },
     {
       id: 2,
       username: 'v2',
-      email: 'v2@v.com'
+      email: 'v2@v.com',
+      active: false,
     },
     {
       id: 3,
       username: 'v3',
-      email: 'v3@v.com'
+      email: 'v3@v.com',
+      active: false,
     },
   ]);
   
   return (
     <>
-    <CreateUser username={username} email={email} onChange={onChange} onCreate={onCreate}/>
-    <UserList users={users} onRemove={onRemove}/>
+    <CreateUser username={username} email={email} onChange={onChange} onCreate={onCreate} onToggle={onToggle}/>
+    <UserList users={users} onRemove={onRemove} onToggle={onToggle}/>
     </>
   );
 }
