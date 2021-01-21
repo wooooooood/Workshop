@@ -18,3 +18,16 @@ Good to do with friend!
 
 Go hit the videos and enjoy day1
 
+### Outro
+You did it  
+Congratu freakin lations  
+You killed it  
+Great job  
+I'm really proud of you  
+motivation -> **Keep going**  
+how? for some, teaching others. blog post, youtube tutorial ..  
+Being involved in Open source does not mean building fw  
+where you can contribute is sharing what you know  
+Really, 
+Keep it up
+Keep building stuff
