@@ -1,6 +1,11 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState, useMemo} from 'react';
 import UserList from './UserList';
 import CreateUser from './CreateUser';
+
+function countActiveUsers(users) {
+  console.log('센다');
+  return users.filter(user => user.active).length;
+}
 
 function App() {
   const [inputs, setInputs] = useState({
@@ -61,10 +66,13 @@ function App() {
     },
   ]);
   
+  const count = useMemo(() => countActiveUsers(users), [users]); //users가 바뀔 때에만 함수가 호출되고 그렇지 않으면 이전 값을 재사용한다
+
   return (
     <>
     <CreateUser username={username} email={email} onChange={onChange} onCreate={onCreate} onToggle={onToggle}/>
     <UserList users={users} onRemove={onRemove} onToggle={onToggle}/>
+    <div>활성 사용자 수: {count}</div>
     </>
   );
 }
