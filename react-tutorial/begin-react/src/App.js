@@ -1,6 +1,11 @@
-import React, {useRef, useState, useMemo} from 'react';
+import React, {useRef, useState, useMemo, useCallback} from 'react';
 import UserList from './UserList';
 import CreateUser from './CreateUser';
+
+//함수를 새로 만드는 것(선언)자체는 메모리/cpu소모가 없으므로 부하가 걸리지 않지만
+//한번 만든 함수는 최대한 재사용!!
+//props가 바뀌지 않았다면 virtual dom이 하는 리렌더링을 하지 않을 수 있다!
+//매번 함수가 새로 만들어지는 구조라면 최적화 불가능
 
 function countActiveUsers(users) {
   console.log('센다');
@@ -8,43 +13,6 @@ function countActiveUsers(users) {
 }
 
 function App() {
-  const [inputs, setInputs] = useState({
-    username: '',
-    email: ''
-  });
-  const {username, email} = inputs;
-  
-  const nextId = useRef(4);
-  const onCreate = () => {
-    const user = {
-      id: nextId.current,
-      username,
-      email,
-    };
-    setUsers([...users, user]);
-    setInputs({
-      username: '',
-      email: ''
-    });
-    nextId.current += 1;
-  };
-  const onChange = e => {
-    const {name, value} = e.target;
-    setInputs({
-      ...inputs,
-      [name]:value
-    });
-  };
-  const onRemove = id =>{
-    setUsers(users.filter(user => user.id != id));
-  }
-  const onToggle = id => {
-    setUsers(users.map(
-      user => user.id === id
-      ? {...user, active: !user.active}
-      : user
-    ));
-  }
   const [users, setUsers] = useState([
     {
       id: 1,
@@ -65,6 +33,44 @@ function App() {
       active: false,
     },
   ]);
+
+  const [inputs, setInputs] = useState({
+    username: '',
+    email: ''
+  });
+  const {username, email} = inputs;
+  
+  const nextId = useRef(4);
+  const onCreate = useCallback(() => {
+    const user = {
+      id: nextId.current,
+      username,
+      email,
+    };
+    setUsers([...users, user]);
+    setInputs({
+      username: '',
+      email: ''
+    });
+    nextId.current += 1;
+  }, [username, email, users]); //useCallback내부에서 참조할 상태 제대로 안넣으면 가장 최신 아닌 옜날 상태 참조할 수 있음
+  const onChange = useCallback(e => {
+    const {name, value} = e.target;
+    setInputs({
+      ...inputs,
+      [name]:value
+    });
+  }, [inputs]); //inputs가 바뀔때만 함수가 만들어지고 그렇지 않으면 함수 재사용
+  const onRemove = useCallback(id =>{
+    setUsers(users.filter(user => user.id != id));
+  }, [users]);
+  const onToggle = useCallback(id => {
+    setUsers(users.map(
+      user => user.id === id
+      ? {...user, active: !user.active}
+      : user
+    ));
+  }, [users]);  //최적화 전단계임. 렌더링 확인은 react dev tools라는 extension깔아서 사용
   
   const count = useMemo(() => countActiveUsers(users), [users]); //users가 바뀔 때에만 함수가 호출되고 그렇지 않으면 이전 값을 재사용한다
 
