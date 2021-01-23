@@ -10,4 +10,4 @@ function CreateUser({username, email, onChange, onCreate}){
     )
 }
 
-export default CreateUser;
+export default React.memo(CreateUser); //감싸주면 props가 바뀌었을때만 리렌더링해준다

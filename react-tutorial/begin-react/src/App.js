@@ -47,13 +47,13 @@ function App() {
       username,
       email,
     };
-    setUsers([...users, user]);
+    setUsers(users => users.concat(user)); //여기에서 최신 users를 조회하므로 dep에 안넣어도됨
     setInputs({
       username: '',
       email: ''
     });
     nextId.current += 1;
-  }, [username, email, users]); //useCallback내부에서 참조할 상태 제대로 안넣으면 가장 최신 아닌 옜날 상태 참조할 수 있음
+  }, [username, email]);
   const onChange = useCallback(e => {
     const {name, value} = e.target;
     setInputs({
@@ -62,15 +62,15 @@ function App() {
     });
   }, [inputs]); //inputs가 바뀔때만 함수가 만들어지고 그렇지 않으면 함수 재사용
   const onRemove = useCallback(id =>{
-    setUsers(users.filter(user => user.id != id));
+    setUsers(users => users.filter(user => user.id != id));
   }, [users]);
   const onToggle = useCallback(id => {
-    setUsers(users.map(
+    setUsers(users => users.map(
       user => user.id === id
       ? {...user, active: !user.active}
       : user
     ));
-  }, [users]);  //최적화 전단계임. 렌더링 확인은 react dev tools라는 extension깔아서 사용
+  }, []);  //최적화 전단계임. 렌더링 확인은 react dev tools라는 extension깔아서 사용
   
   const count = useMemo(() => countActiveUsers(users), [users]); //users가 바뀔 때에만 함수가 호출되고 그렇지 않으면 이전 값을 재사용한다
 
