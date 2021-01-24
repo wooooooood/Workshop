@@ -1,11 +1,10 @@
 import React, {useRef, useState, useMemo, useCallback} from 'react';
+//useState는 설정하고싶은 다음 상태를 직접 지정해서 업데이트
+//useReducer는 액션 객체를 토대로 업데이트 => 컴포넌트 상태 업데이트 로직을 컴포넌트 밖으로 분리 가능
+//reducer: 상태를 업데이트하는 함수
+//const [number(현재상태), dispatch(액션을 발생시킨다)] = useReducer(reducer, 0)
 import UserList from './UserList';
 import CreateUser from './CreateUser';
-
-//함수를 새로 만드는 것(선언)자체는 메모리/cpu소모가 없으므로 부하가 걸리지 않지만
-//한번 만든 함수는 최대한 재사용!!
-//props가 바뀌지 않았다면 virtual dom이 하는 리렌더링을 하지 않을 수 있다!
-//매번 함수가 새로 만들어지는 구조라면 최적화 불가능
 
 function countActiveUsers(users) {
   console.log('센다');
@@ -13,7 +12,7 @@ function countActiveUsers(users) {
 }
 
 function App() {
-  const [users, setUsers] = useState([
+  const [users, setUsers] = useState([ 
     {
       id: 1,
       username: 'v',
