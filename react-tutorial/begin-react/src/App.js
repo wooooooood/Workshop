@@ -1,8 +1,4 @@
-import React, {useRef, useState, useMemo, useCallback} from 'react';
-//useState는 설정하고싶은 다음 상태를 직접 지정해서 업데이트
-//useReducer는 액션 객체를 토대로 업데이트 => 컴포넌트 상태 업데이트 로직을 컴포넌트 밖으로 분리 가능
-//reducer: 상태를 업데이트하는 함수
-//const [number(현재상태), dispatch(액션을 발생시킨다)] = useReducer(reducer, 0)
+import React, {useRef, useReducer, useMemo, useCallback} from 'react';
 import UserList from './UserList';
 import CreateUser from './CreateUser';
 
@@ -11,8 +7,12 @@ function countActiveUsers(users) {
   return users.filter(user => user.active).length;
 }
 
-function App() {
-  const [users, setUsers] = useState([ 
+const initialState = {
+  inputs: {
+    username: '',
+    email: ''
+  },
+  users: [
     {
       id: 1,
       username: 'v',
@@ -31,55 +31,101 @@ function App() {
       email: 'v3@v.com',
       active: false,
     },
-  ]);
+  ]
+}
 
-  const [inputs, setInputs] = useState({
-    username: '',
-    email: ''
-  });
-  const {username, email} = inputs;
-  
-  const nextId = useRef(4);
-  const onCreate = useCallback(() => {
-    const user = {
-      id: nextId.current,
-      username,
-      email,
-    };
-    setUsers(users => users.concat(user)); //여기에서 최신 users를 조회하므로 dep에 안넣어도됨
-    setInputs({
-      username: '',
-      email: ''
-    });
-    nextId.current += 1;
-  }, [username, email]);
+function reducer(state, action){
+  switch (action.type){
+    case 'CHANGE_INPUT':
+      return {
+        ...state,
+        inputs: {
+          ...state.inputs,
+          [action.name]: action.value
+        }
+      };
+    case 'CREATE_USER':
+      return {
+        inputs: initialState.inputs,
+        users: state.users.concat(action.user)
+      };
+    case 'TOGGLE_USER':
+      return {
+        ...state,
+        users: state.users.map(user => 
+          user.id === action.id
+          ? {...user, active: !user.active}
+          : user
+        )
+      };
+    case 'REMOVE_USER':
+      return {
+        ...state,
+        users: state.users.filter(user => user.id !== action.id)
+      }
+    default:
+      throw new Error('Unhandled Action');
+  }
+}
+
+function App() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const nextId = useRef(4); //기존에 3개가 등록되어있으므로
+  const {users} = state;
+  const {username, email} = state.inputs;
+
   const onChange = useCallback(e => {
     const {name, value} = e.target;
-    setInputs({
-      ...inputs,
-      [name]:value
+    dispatch({
+      type: 'CHANGE_INPUT',
+      name,
+      value
+    })
+  }, []);
+
+  const onCreate = useCallback(() => {
+    dispatch({
+      type: 'CREATE_USER',
+      user: {
+        id: nextId.current,
+        username,
+        email,
+      }
     });
-  }, [inputs]); //inputs가 바뀔때만 함수가 만들어지고 그렇지 않으면 함수 재사용
-  const onRemove = useCallback(id =>{
-    setUsers(users => users.filter(user => user.id != id));
-  }, [users]);
+    nextId.current +=1;
+  }, [username, email]);
+
   const onToggle = useCallback(id => {
-    setUsers(users => users.map(
-      user => user.id === id
-      ? {...user, active: !user.active}
-      : user
-    ));
-  }, []);  //최적화 전단계임. 렌더링 확인은 react dev tools라는 extension깔아서 사용
-  
-  const count = useMemo(() => countActiveUsers(users), [users]); //users가 바뀔 때에만 함수가 호출되고 그렇지 않으면 이전 값을 재사용한다
+    dispatch ({
+      type: 'TOGGLE_USER',
+      id
+    });
+  }, []); //dep 배열 비움: 컴포넌트 처음 만들때만 이 함수 만들고 그다음부턴 재사용 가능
+
+  const onRemove = useCallback(id => {
+    dispatch({
+      type: 'REMOVE_USER',
+      id
+    });
+  }, []);
+
+  const count = useMemo(() => countActiveUsers(users), [users]);
 
   return (
     <>
-    <CreateUser username={username} email={email} onChange={onChange} onCreate={onCreate} onToggle={onToggle}/>
-    <UserList users={users} onRemove={onRemove} onToggle={onToggle}/>
+    <CreateUser username={username} email={email} onChange={onChange} onCreate={onCreate} onToggle={onToggle} onRemove={onRemove}/>
+    <UserList users={users} onToggle={onToggle} onRemove={onRemove}/>
     <div>활성 사용자 수: {count}</div>
     </>
   );
 }
 
 export default App;
+
+/* * *
+useReducer vs useState
+ex. 컴포넌트에서 관리하는 값이 하나고, 그 값이 불변값(문자열..)이라면 => useState가 편하다
+ex. 컴포넌트에서 관리하는 값이 여러개라 상태가 복잡해지거나 값을 바꿔야할때 => useReducer가 좀 더 편할수도!
+    ex. 한 함수 안에서 set을 여러개 할 때? 함 해보고 결정
+자주 사용해보고 맘에드는것 
+* * */

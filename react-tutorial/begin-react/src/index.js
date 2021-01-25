@@ -3,12 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import Counter from './Counter';
 
 //page에서 id root인 것 안에 넣겠다. public/index.html안에
 ReactDOM.render(
   <React.StrictMode>
-    <Counter />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
