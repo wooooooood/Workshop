@@ -1,18 +1,29 @@
-import {useState, useCallback} from 'react';
+import {useReducer, useCallback} from 'react';
 
 function reducer(state, action){
-  //change
-  //reset
+  switch (action.type){
+    case 'CHANGE':
+      return {
+        ...state,
+        [action.name]: action.value //////////??
+      };
+    case 'RESET':
+        return Object.keys(state).reduce((acc, current) => { ////////??
+          acc[current] = '';
+          return acc;
+        }, {});
+    default:
+      throw new Error('Unhandled Action');
+  }
 }
 
 function useInputs(initialForm) {
-  const [form, setForm] = useState(initialForm); //숙제: UseReducer로 구현
+  const [form, dispatch] = useReducer(reducer, initialForm);
   const onChange = useCallback(e => {
     const {name, value} = e.target;
-    setForm(form => ({...form, [name]: value}));
+    dispatch({ type: 'CHANGE', name, value })
   }, []);
-  const reset = useCallback(() => setForm(initialForm), [initialForm]);
-  
+  const reset = useCallback(() => {dispatch({ type: 'RESET' })}, []);
   return [form, onChange, reset];
 };
 
