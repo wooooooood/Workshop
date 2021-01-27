@@ -96,6 +96,8 @@ function App() {
 
   const count = useMemo(() => countActiveUsers(users), [users]);
 
+  //현재 UserList에는 onRemove, onToggle을 안쓰는데 App에서 User에 전달하기 위해 주고 있음.
+  //컴포넌트가 더 복잡해지면..?!
   return (
     <>
     <CreateUser username={username} email={email} onChange={onChange} onCreate={onCreate} onToggle={onToggle} onRemove={onRemove}/>

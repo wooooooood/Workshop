@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import ContextSample from './ContextSample';
 import * as serviceWorker from './serviceWorker';
 
 //page에서 id root인 것 안에 넣겠다. public/index.html안에
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ContextSample />
   </React.StrictMode>,
   document.getElementById('root')
 );
