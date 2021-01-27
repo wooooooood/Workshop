@@ -30,7 +30,7 @@ const [value, setValue] = useState(true);
 export default ContextSample;
 
 /*
-1. Context를 만들 때는 createContext(기본값)를 사용하고 파라미터는 Provider가 사용되지 않았을 때의 기본값.
+1. Context를 만들 때는 createContext(기본값)를 사용하고 파라미터는 Provider라는 컴포넌트가 사용되지 않았을 때의 기본값.
 2. 값을 설정하고 싶다면 Provider로 value값을 설정해줘야 함
 3. 유동적으로 변경 가능
 */

@@ -1,4 +1,4 @@
-import React, {useRef, useReducer, useMemo, useCallback} from 'react';
+import React, {useRef, useReducer, useMemo, useCallback, createContext} from 'react';
 import UserList from './UserList';
 import CreateUser from './CreateUser';
 import useInputs from './useInputs';
@@ -57,6 +57,8 @@ function reducer(state, action){
   }
 }
 
+export const UserDispatch = createContext(null);
+
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [form, onChange, reset] = useInputs({
@@ -78,32 +80,16 @@ function App() {
     });
     nextId.current +=1;
     reset();
-  }, [username, email, reset]); //reset은 eslint규칙상 반환한 거기 때문에 넣어줌, 사실 안넣어도 동작함
-
-  const onToggle = useCallback(id => {
-    dispatch ({
-      type: 'TOGGLE_USER',
-      id
-    });
-  }, []); //dep 배열 비움: 컴포넌트 처음 만들때만 이 함수 만들고 그다음부턴 재사용 가능
-
-  const onRemove = useCallback(id => {
-    dispatch({
-      type: 'REMOVE_USER',
-      id
-    });
-  }, []);
+  }, [username, email, reset]);
 
   const count = useMemo(() => countActiveUsers(users), [users]);
 
-  //현재 UserList에는 onRemove, onToggle을 안쓰는데 App에서 User에 전달하기 위해 주고 있음.
-  //컴포넌트가 더 복잡해지면..?!
   return (
-    <>
-    <CreateUser username={username} email={email} onChange={onChange} onCreate={onCreate} onToggle={onToggle} onRemove={onRemove}/>
-    <UserList users={users} onToggle={onToggle} onRemove={onRemove}/>
-    <div>활성 사용자 수: {count}</div>
-    </>
+    <UserDispatch.Provider value={dispatch}>
+      <CreateUser username={username} email={email} onChange={onChange} onCreate={onCreate} />
+      <UserList users={users} />
+      <div>활성 사용자 수: {count}</div>
+    </UserDispatch.Provider>
   );
 }
 
