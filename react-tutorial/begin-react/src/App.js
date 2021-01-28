@@ -1,6 +1,9 @@
 import React, {useReducer, useMemo, createContext} from 'react';
+import produce from 'immer';
 import UserList from './UserList';
 import CreateUser from './CreateUser';
+
+window.produce = produce; //window test용
 
 function countActiveUsers(users) {
   console.log('센다');
