@@ -1,26 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 
-function Food({name, rating}) {  //(props) => props.fav
-  return <h3>🍌 {name}: {rating}/5.0</h3>
-}
-
-const foodILike = [{id: 1, name: "kimchi", rating:3}, {id:2, name: "samgiopsal",rating:4}];
-Food.propTypes = {
-  name: PropTypes.string.isRequired,
-  picture: PropTypes.string,
-  rating: PropTypes.number.isRequired,
-}
-
-function App() {
-  return (
+class App extends React.Component{
+  state = {
+    count: 0
+  };
+  add = () => {
+    this.setState({count:1});
+  };
+  minus = () => {
+    this.setState({count:-1});
+  };
+  render(){
+    return (
     <div>
-      <h1>Hello</h1>
-      {
-        foodILike.map((dish) => <Food key={dish.id} name={dish.name} rating={dish.rating}/>)
-      }
-    </div>
-  );
+      <h1>hi {this.state.count}</h1>
+      <button onClick={this.add}>+</button>
+      <button onClick={this.minus}>-</button>
+    </div>)
+  }
 }
 
 export default App;
