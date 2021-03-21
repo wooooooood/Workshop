@@ -15,3 +15,4 @@ page가 react로 개발되었는지 알려주는 chrome extension이 있음
 
 npm i prop-types
 
+add css from https://github.com/nomadcoders/movie_app_2019

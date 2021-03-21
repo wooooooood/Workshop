@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import "./Movie.css";
 
 function Movie({title, summary, poster, year, genres}) {
-    return (<div className="movies__movie">
+    return (<div className="movie">
         <img src={poster} alt={title}/>
         <h3 className="movie__title">{title}</h3>
         <h5 className="movie__year">{year}</h5>
