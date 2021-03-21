@@ -24,3 +24,11 @@ add css from https://github.com/nomadcoders/movie_app_2019
 2. npm run build -> get build dir
 3. Edit package-json -> add `homepage`, script `deploy`, `predeploy` 
 4. npm run deploy (calls predeploy automatically, pre'deploy' has to be same)
+
+### React hooks
+- state를 관리하기 위해 class component를 사용할 필요가 없음
+
+### Interactive
+- npm i react-router-dom
+- exact={true} Router path 가 정확하게 이거일때만 렌더링한다
+- `Link`를 사용하면 Router안에 넣어야한다
