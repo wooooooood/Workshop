@@ -13,6 +13,14 @@ page가 react로 개발되었는지 알려주는 chrome extension이 있음
 - Local: http://localhost:3000  (runs on your computer)
 - On Your Network: http://000.000.000.000:3000  (runs in wifi.. friends or phone in this wifi)  
 
+### PropTypes
 npm i prop-types
 
+### Add CSS
 add css from https://github.com/nomadcoders/movie_app_2019
+
+### Deploy 
+1. npm i gh-pages
+2. npm run build -> get build dir
+3. Edit package-json -> add `homepage`, script `deploy`, `predeploy` 
+4. npm run deploy (calls predeploy automatically, pre'deploy' has to be same)
