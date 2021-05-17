@@ -36,24 +36,36 @@ const initialState = {
 function reducer(state, action){
   switch (action.type){
     case 'CREATE_USER':
-      return {
-        inputs: initialState.inputs,
-        users: state.users.concat(action.user)
-      };
+      return produce(state, draft => {  //immer version
+        draft.users.push(action.user);
+      });
+      // return {
+      //   inputs: initialState.inputs,
+      //   users: state.users.concat(action.user)
+      // };
     case 'TOGGLE_USER':
-      return {
-        ...state,
-        users: state.users.map(user => 
-          user.id === action.id
-          ? {...user, active: !user.active}
-          : user
-        )
-      };
+      return produce(state, draft => {  //immer version
+        const user = draft.users.find(user => user.id === action.id);
+        user.active = !user.active;
+
+      });
+      // return {
+      //   ...state,
+      //   users: state.users.map(user => 
+      //     user.id === action.id
+      //     ? {...user, active: !user.active}
+      //     : user
+      //   )
+      // };
     case 'REMOVE_USER':
-      return {
-        ...state,
-        users: state.users.filter(user => user.id !== action.id)
-      }
+      return produce(state, draft => {  //immer version
+        const index = draft.users.findIndex(user => user.id === action.id);
+        draft.users.splice(index, 1);
+      });
+      // return {
+      //   ...state,
+      //   users: state.users.filter(user => user.id !== action.id)
+      // }
     default:
       throw new Error('Unhandled Action');
   }
@@ -84,4 +96,7 @@ ex. 컴포넌트에서 관리하는 값이 하나고, 그 값이 불변값(문�
 ex. 컴포넌트에서 관리하는 값이 여러개라 상태가 복잡해지거나 값을 바꿔야할때 => useReducer가 좀 더 편할수도!
     ex. 한 함수 안에서 set을 여러개 할 때? 함 해보고 결정
 자주 사용해보고 맘에드는것 
+
+immer
+복잡해져서 어쩔 수 없을 때, 필요한 곳에만 사용하라
 * * */
