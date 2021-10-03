@@ -1,6 +1,7 @@
 import { useAppSelector, useAppDispatch } from "@app/hooks";
 import { ChangeEvent, useState } from "react";
 import TodoAdd from "./TodoAdd";
+import TodoHeader from "./TodoHeader";
 import TodoItem from "./TodoItem";
 import { add, edit, itemList } from "./todoListSlice";
 
@@ -10,6 +11,7 @@ const TodoList = () => {
 
   return (
     <div>
+      <TodoHeader />
       <TodoAdd />
       {items.map((item) => (
         <TodoItem

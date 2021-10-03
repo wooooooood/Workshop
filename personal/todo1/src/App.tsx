@@ -9,7 +9,6 @@ function App() {
       <GlobalStyle />
       <ThemeProvider theme={theme}>
         <div className="App">
-          <h3>todo list</h3>
           <TodoList />
         </div>
       </ThemeProvider>

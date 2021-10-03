@@ -4,19 +4,18 @@ import { add, edit, itemList } from "./todoListSlice";
 
 const TodoAdd = () => {
   const dispatch = useAppDispatch();
-  const [newText, setNewText] = useState("");
   const [value, setValue] = useState("");
 
   const onClick = () => {
-    dispatch(add(newText));
+    dispatch(add(value));
     setValue("");
   };
   const onChange = (e: ChangeEvent<HTMLInputElement>) =>
-    setNewText(e.target.value);
+    setValue(e.target.value);
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); //prevent refresh
 
-    dispatch(add(newText));
+    dispatch(add(value));
     setValue("");
   };
 
