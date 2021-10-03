@@ -5,16 +5,19 @@ import { GetAsync } from "@utils/api";
 export interface todoListState {
   status: "idle" | "loading" | "failed";
   itemList: Array<todoItem>;
+  nextId: number;
 }
 
-interface todoItem {
+export interface todoItem {
   id: number;
   text: string;
+  done: boolean;
 }
 
 const initialState: todoListState = {
   status: "idle",
   itemList: [],
+  nextId: 0,
 };
 
 export const incrementAsync = createAsyncThunk(
@@ -30,18 +33,29 @@ export const todoListSlice = createSlice({
   initialState,
   reducers: {
     add: (state, text: PayloadAction<string>) => {
-      state.itemList = [...state.itemList, { id: 1, text: text.payload }];
+      state.nextId += 1;
+      state.itemList = [
+        ...state.itemList,
+        { id: state.nextId, text: text.payload, done: false },
+      ];
     },
-    delete: (state, id: PayloadAction<number>) => {
+    remove: (state, id: PayloadAction<number>) => {
       state.itemList = [
         ...state.itemList.filter((item) => item.id !== id.payload),
       ];
     },
-    update: (state, action: PayloadAction<todoItem>) => {
+    toggle: (state, id: PayloadAction<number>) => {
+      state.itemList = [
+        ...state.itemList.map((item) =>
+          item.id === id.payload ? { ...item, done: !item.done } : item
+        ),
+      ];
+    },
+    edit: (state, action: PayloadAction<todoItem>) => {
       state.itemList = [
         ...state.itemList.map((item) =>
           item.id === action.payload.id
-            ? { id: item.id, text: action.payload.text }
+            ? { ...item, text: action.payload.text }
             : item
         ),
       ];
@@ -59,7 +73,7 @@ export const todoListSlice = createSlice({
   },
 });
 
-export const { add, update } = todoListSlice.actions;
+export const { add, edit, toggle, remove } = todoListSlice.actions;
 
 export const itemList = (state: RootState) => state.todoList.itemList;
 export default todoListSlice.reducer;

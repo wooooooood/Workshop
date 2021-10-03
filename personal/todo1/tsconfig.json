@@ -18,6 +18,7 @@
     "paths": {
       "@utils/*": ["./src/utils/*"],
       "@app/*": ["./src/app/*"],
+      "@styles/*": ["./src/styles/*"],
       "@features/*": ["./src/features/*"]
     }
   },

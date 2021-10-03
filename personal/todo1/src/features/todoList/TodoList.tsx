@@ -1,38 +1,24 @@
 import { useAppSelector, useAppDispatch } from "@app/hooks";
-import { useState } from "react";
-import { add, update, itemList } from "./todoListSlice";
+import { ChangeEvent, useState } from "react";
+import TodoAdd from "./TodoAdd";
+import TodoItem from "./TodoItem";
+import { add, edit, itemList } from "./todoListSlice";
 
 const TodoList = () => {
   const dispatch = useAppDispatch();
   const items = useAppSelector(itemList);
-  const [newText, setNewText] = useState("");
-
-  const onAdd = () => {
-    dispatch(add(newText));
-  };
-
-  const onAddKeyUp = (e: KeyboardEvent): void => {
-    if (e.key === "Enter") dispatch(add(newText));
-  };
 
   return (
     <div>
-      hi
-      <div>
-        <input
-          type="text"
-          value={newText}
-          onChange={({ target }) => setNewText(target.value)}
+      <TodoAdd />
+      {items.map((item) => (
+        <TodoItem
+          key={item.id}
+          id={item.id}
+          text={item.text}
+          done={item.done}
         />
-        <button type="button" onClick={onAdd}>
-          추가
-        </button>
-      </div>
-      <ul>
-        {items.map((item) => (
-          <li key={item.id}>{item.text}</li>
-        ))}
-      </ul>
+      ))}
     </div>
   );
 };

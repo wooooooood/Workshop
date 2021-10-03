@@ -91,6 +91,7 @@ module.exports = () => {
         "@utils": path.resolve(__dirname, "./src/utils"),
         "@features": path.resolve(__dirname, "./src/features"),
         "@app": path.resolve(__dirname, "./src/app"),
+        "@styles": path.resolve(__dirname, "./src/styles"),
       },
     },
   };
