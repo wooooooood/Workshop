@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const apiMocker = require("connect-api-mocker");
 const mode = process.env.NODE_ENV || "development";
 module.exports = () => {
@@ -26,6 +27,9 @@ module.exports = () => {
             : false,
       }),
     ],
+    optimization: {
+      minimizer: mode === "production" ? [new OptimizeCSSAssetsPlugin()] : [], //css 빈칸 제거 압축
+    },
     module: {
       rules: [
         {
