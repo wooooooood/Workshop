@@ -7,7 +7,10 @@ const TodoAdd = () => {
   const [newText, setNewText] = useState("");
   const [value, setValue] = useState("");
 
-  const onAdd = () => dispatch(add(newText));
+  const onClick = () => {
+    dispatch(add(newText));
+    setValue("");
+  };
   const onChange = (e: ChangeEvent<HTMLInputElement>) =>
     setNewText(e.target.value);
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -21,8 +24,8 @@ const TodoAdd = () => {
     <div>
       <form onSubmit={onSubmit}>
         <input type="text" value={value} onChange={onChange} />
-        <button onClick={onAdd}>추가</button>
       </form>
+      <button onClick={onClick}>추가</button>
     </div>
   );
 };

@@ -5,7 +5,7 @@ import { GetAsync } from "@utils/api";
 export interface todoListState {
   status: "idle" | "loading" | "failed";
   itemList: Array<todoItem>;
-  nextId: number;
+  currentId: number;
 }
 
 export interface todoItem {
@@ -16,8 +16,11 @@ export interface todoItem {
 
 const initialState: todoListState = {
   status: "idle",
-  itemList: [],
-  nextId: 0,
+  itemList: [
+    { id: 1, text: "do this", done: true },
+    { id: 2, text: "do that", done: false },
+  ],
+  currentId: 2,
 };
 
 export const incrementAsync = createAsyncThunk(
@@ -33,10 +36,10 @@ export const todoListSlice = createSlice({
   initialState,
   reducers: {
     add: (state, text: PayloadAction<string>) => {
-      state.nextId += 1;
+      state.currentId += 1;
       state.itemList = [
         ...state.itemList,
-        { id: state.nextId, text: text.payload, done: false },
+        { id: state.currentId, text: text.payload, done: false },
       ];
     },
     remove: (state, id: PayloadAction<number>) => {
