@@ -1891,7 +1891,7 @@
   dependencies:
     "@types/node" "*"
 
-"@types/hoist-non-react-statics@^3.3.0":
+"@types/hoist-non-react-statics@*", "@types/hoist-non-react-statics@^3.3.0":
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/@types/hoist-non-react-statics/-/hoist-non-react-statics-3.3.1.tgz#1124aafe5118cb591977aeb1ceaaed1070eb039f"
   integrity sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA==
@@ -1995,19 +1995,12 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.5.tgz#75a2a8e7d8ab4b230414505d92335d1dcb53a6df"
   integrity sha512-L28j2FcJfSZOnL1WBjDYp2vUHCeIFlyYI/53EwD/rKUBQ7MtUUfbQWiyKJGpcnv4/WgrhWsFKrcPstcAt/J0tQ==
 
-"@types/react-dom@*":
+"@types/react-dom@*", "@types/react-dom@^17.0.9":
   version "17.0.9"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.9.tgz#441a981da9d7be117042e1a6fd3dac4b30f55add"
   integrity sha512-wIvGxLfgpVDSAMH5utdL9Ngm5Owu0VsGmldro3ORLXV8CShrL8awVj06NuEXFQ5xyaYfdca7Sgbk/50Ri1GdPg==
   dependencies:
     "@types/react" "*"
-
-"@types/react-dom@^16.9.0":
-  version "16.9.14"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.9.14.tgz#674b8f116645fe5266b40b525777fc6bb8eb3bcd"
-  integrity sha512-FIX2AVmPTGP30OUJ+0vadeIFJJ07Mh1m+U0rxfgyW34p3rTlXI+nlenvAxNn4BP36YyI9IJ/+UJ7Wu22N1pI7A==
-  dependencies:
-    "@types/react" "^16"
 
 "@types/react-redux@^7.1.16", "@types/react-redux@^7.1.7":
   version "7.1.18"
@@ -2019,19 +2012,10 @@
     hoist-non-react-statics "^3.3.0"
     redux "^4.0.0"
 
-"@types/react@*":
+"@types/react@*", "@types/react@^17.0.26":
   version "17.0.26"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.26.tgz#960ea4b3518cc154ed7df3b35656c508df653331"
   integrity sha512-MXxuXrH2xOcv5cp/su4oz69dNQnSA90JjFw5HBd5wifw6Ihi94j7dRJm7qNsB30tnruXSCPc9qmlhGop4nh9Hw==
-  dependencies:
-    "@types/prop-types" "*"
-    "@types/scheduler" "*"
-    csstype "^3.0.2"
-
-"@types/react@^16", "@types/react@^16.9.0":
-  version "16.14.15"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.14.15.tgz#95d8fa3148050e94bcdc5751447921adbe19f9e6"
-  integrity sha512-jOxlBV9RGZhphdeqJTCv35VZOkjY+XIEY2owwSk84BNDdDv2xS6Csj6fhi+B/q30SR9Tz8lDNt/F2Z5RF3TrRg==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -2063,6 +2047,15 @@
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/@types/stack-utils/-/stack-utils-2.0.1.tgz#20f18294f797f2209b5f65c8e3b5c8e8261d127c"
   integrity sha512-Hl219/BT5fLAaz6NDkSuhzasy49dwQS/DSdu4MdggFB8zcXv7vflBI3xp7FEmkmdDkBUI2bPUNeMttp2knYdxw==
+
+"@types/styled-components@^5.1.14":
+  version "5.1.14"
+  resolved "https://registry.yarnpkg.com/@types/styled-components/-/styled-components-5.1.14.tgz#e9cf8cdb5eef9d139628183a84c083f630635d67"
+  integrity sha512-d6P1/tyNytqKwam3cQXq7a9uPtovc/mdAs7dBiz1YbDdNIT3X4WmuFU78YdSYh84TXVuhOwezZ3EeKuNBhwsHQ==
+  dependencies:
+    "@types/hoist-non-react-statics" "*"
+    "@types/react" "*"
+    csstype "^3.0.2"
 
 "@types/tapable@^1", "@types/tapable@^1.0.5":
   version "1.0.8"
