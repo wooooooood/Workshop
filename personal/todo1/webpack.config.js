@@ -88,7 +88,9 @@ module.exports = () => {
     resolve: {
       extensions: [".ts", ".tsx", ".js", ".jsx", ".css", ".scss", ".json"],
       alias: {
-        // "@stories": path.resolve(__dirname, "./src/stories"),
+        "@utils": path.resolve(__dirname, "./src/utils"),
+        "@features": path.resolve(__dirname, "./src/features"),
+        "@app": path.resolve(__dirname, "./src/app"),
       },
     },
   };
