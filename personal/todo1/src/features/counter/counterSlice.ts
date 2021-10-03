@@ -22,6 +22,7 @@ export const incrementAsync = createAsyncThunk(
   "counter/fetchCount",
   async (amount: number) => {
     const response = await fetchCount(amount);
+    //const { data } = await axios.get("http://localhost:8081/api/test"); //직접 api 서버로 요청
     const result = await axios.get("/api/test");
     console.log(result.data);
     // The value we return becomes the `fulfilled` action payload

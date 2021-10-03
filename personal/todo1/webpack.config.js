@@ -54,6 +54,9 @@ module.exports = () => {
       onBeforeSetupMiddleware: (devServer) => {
         devServer.app.use(apiMocker("/api", "mocks/api"));
       },
+      proxy: {
+        "/api": "http://localhost:8081", // 프록시
+      },
     },
     resolve: {
       extensions: [".ts", ".tsx", ".js", ".jsx", ".css", ".scss", ".json"],
