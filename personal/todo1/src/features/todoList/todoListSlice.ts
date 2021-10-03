@@ -37,10 +37,11 @@ export const todoListSlice = createSlice({
   reducers: {
     add: (state, text: PayloadAction<string>) => {
       state.currentId += 1;
-      state.itemList = [
-        ...state.itemList,
-        { id: state.currentId, text: text.payload, done: false },
-      ];
+      state.itemList = state.itemList.concat({
+        id: state.currentId,
+        text: text.payload,
+        done: false,
+      });
     },
     remove: (state, id: PayloadAction<number>) => {
       state.itemList = [
