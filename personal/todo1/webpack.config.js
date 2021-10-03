@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const apiMocker = require("connect-api-mocker");
 const mode = process.env.NODE_ENV || "development";
 module.exports = () => {
   return {
@@ -50,6 +51,9 @@ module.exports = () => {
       port: 8080,
       open: true,
       historyApiFallback: true,
+      onBeforeSetupMiddleware: (devServer) => {
+        devServer.app.use(apiMocker("/api", "mocks/api"));
+      },
     },
     resolve: {
       extensions: [".ts", ".tsx", ".js", ".jsx", ".css", ".scss", ".json"],
